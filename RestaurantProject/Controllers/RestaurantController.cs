@@ -22,6 +22,13 @@ namespace RestaurantProject.Controllers
             return Ok(await _restaurantService.GetAllAsync());
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetById(int id)
+        {
+            var restaurant = await _restaurantService.GetByIdAsync(id);
+            return Ok(restaurant);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Add(Restaurant restaurant)

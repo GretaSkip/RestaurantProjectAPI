@@ -23,6 +23,8 @@ namespace RestaurantProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors();
+
             services.AddDbContext<DataContext>(d =>
                d.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -40,12 +42,15 @@ namespace RestaurantProject
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "RestaurantProject", Version = "v1" });
             });
 
-            services.AddCors();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(options =>
+                options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -64,8 +69,6 @@ namespace RestaurantProject
                 endpoints.MapControllers();
             });
 
-            app.UseCors(options =>
-                options.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
         }
     }
 }

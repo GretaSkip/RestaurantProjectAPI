@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestaurantProject.Entities;
 using RestaurantProject.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace RestaurantProject.Controllers
@@ -22,6 +19,13 @@ namespace RestaurantProject.Controllers
         public async Task<ActionResult> GetAll()
         {
             return Ok(await _meniuService.GetAllAsync());
+        }
+
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetById(int id)
+        {
+            var meniu = await _meniuService.GetByIdAsync(id);
+            return Ok(meniu);
         }
 
 
