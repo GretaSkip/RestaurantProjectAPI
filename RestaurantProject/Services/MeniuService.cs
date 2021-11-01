@@ -45,6 +45,7 @@ namespace RestaurantProject.Services
                 existingMeniu.Price = meniu.Price;
                 existingMeniu.Weight = meniu.Weight;
                 existingMeniu.Meat = meniu.Meat;
+                existingMeniu.About = meniu.About;
             }
             await _meniuRepository.UpdateAsync(existingMeniu);
         }

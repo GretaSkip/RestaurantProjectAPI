@@ -20,10 +20,18 @@ namespace RestaurantProject.Services
         }
 
 
-        public async Task CreateAsync(Restaurant restaurant)
+        public async Task CreateAsync(RestaurantCreateEditDto restaurant)
         {
+            var restaurantEntity = new Restaurant()
+            {
+                Id = restaurant.Id,
+                Title = restaurant.Title,
+                Customers = restaurant.Customers,
+                Employees = restaurant.Employees,
+                MeniuId = restaurant.MeniuId
+            };
 
-            await _restaurantRepository.CreateAsync(restaurant);
+            await _restaurantRepository.CreateAsync(restaurantEntity);
         }
 
         public async Task<Restaurant> GetByIdAsync(int id)
@@ -37,7 +45,7 @@ namespace RestaurantProject.Services
             await _restaurantRepository.DeleteAsync(restaurant);
         }
 
-        public async Task UpdateAsync(EditRestaurantDto restaurant)
+        public async Task UpdateAsync(RestaurantCreateEditDto restaurant)
         {
             var existingRestaurant = await _restaurantRepository.GetByIdAsync(restaurant.Id);
             if (existingRestaurant != null)

@@ -2,6 +2,7 @@
 using RestaurantProject.Data;
 using RestaurantProject.Entities;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace RestaurantProject.Respositories
@@ -17,7 +18,7 @@ namespace RestaurantProject.Respositories
 
         public async Task<List<Meniu>> GetAsync()
         {
-            return await _context.Menius.ToListAsync();
+            return await _context.Menius.OrderBy(p => p.Price).ToListAsync();
         }
 
         public async Task<Meniu> GetByIdAsync(int id)

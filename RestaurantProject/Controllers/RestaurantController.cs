@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using RestaurantProject.Dto;
-using RestaurantProject.Entities;
 using RestaurantProject.Services;
 using System.Threading.Tasks;
 
@@ -31,7 +30,7 @@ namespace RestaurantProject.Controllers
 
 
         [HttpPost]
-        public async Task<IActionResult> Add(Restaurant restaurant)
+        public async Task<IActionResult> Add(RestaurantCreateEditDto restaurant)
         {
             await _restaurantService.CreateAsync(restaurant);
 
@@ -47,7 +46,7 @@ namespace RestaurantProject.Controllers
         }
 
         [HttpPut]
-        public async Task<IActionResult> Update(EditRestaurantDto restaurant)
+        public async Task<IActionResult> Update(RestaurantCreateEditDto restaurant)
         {
             await _restaurantService.UpdateAsync(restaurant);
             return NoContent();
