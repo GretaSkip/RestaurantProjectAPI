@@ -26,10 +26,11 @@ namespace RestaurantProject.Respositories
             return await _context.Menius.FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public async Task CreateAsync(Meniu meniu)
+        public async Task<int> CreateAsync(Meniu meniu)
         {
             _context.Add(meniu);
             await _context.SaveChangesAsync();
+            return meniu.Id;
         }
 
         public async Task DeleteAsync(Meniu meniu)

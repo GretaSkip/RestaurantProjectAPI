@@ -20,7 +20,7 @@ namespace RestaurantProject.Services
         }
 
 
-        public async Task CreateAsync(RestaurantCreateEditDto restaurant)
+        public async Task<int> CreateAsync(RestaurantCreateEditDto restaurant)
         {
             var restaurantEntity = new Restaurant()
             {
@@ -31,12 +31,17 @@ namespace RestaurantProject.Services
                 MeniuId = restaurant.MeniuId
             };
 
-            await _restaurantRepository.CreateAsync(restaurantEntity);
+            return await _restaurantRepository.CreateAsync(restaurantEntity);
         }
 
         public async Task<Restaurant> GetByIdAsync(int id)
         {
             return await _restaurantRepository.GetByIdAsync(id);
+        }
+
+        public async Task<List<Restaurant>> GetByMeniuIdAsync(int meniuId)
+        {
+            return await _restaurantRepository.GetByMeniuIdAsync(meniuId);
         }
 
         public async Task DeleteAsync(int id)

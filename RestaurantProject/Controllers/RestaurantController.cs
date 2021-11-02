@@ -28,13 +28,21 @@ namespace RestaurantProject.Controllers
             return Ok(restaurant);
         }
 
+        [HttpGet]
+        [Route("RestaurantsbyMeniu/{meniuId}")]
+        public async Task<ActionResult> GetByMeniuId(int meniuId)
+        {
+            var restaurant = await _restaurantService.GetByMeniuIdAsync(meniuId);
+            return Ok(restaurant);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Add(RestaurantCreateEditDto restaurant)
         {
-            await _restaurantService.CreateAsync(restaurant);
+            var result = await _restaurantService.CreateAsync(restaurant);
 
-            return NoContent();
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]

@@ -19,10 +19,10 @@ namespace RestaurantProject.Services
         }
 
 
-        public async Task CreateAsync(Meniu meniu)
+        public async Task<int> CreateAsync(Meniu meniu)
         {
 
-            await _meniuRepository.CreateAsync(meniu);
+            return await _meniuRepository.CreateAsync(meniu);
         }
 
         public async Task<Meniu> GetByIdAsync(int id)

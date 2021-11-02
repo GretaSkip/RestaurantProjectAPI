@@ -26,10 +26,16 @@ namespace RestaurantProject.Respositories
             return await _context.Restaurants.FirstOrDefaultAsync(p => p.Id == id);
         }
 
-        public async Task CreateAsync(Restaurant restaurant)
+        public async Task<List<Restaurant>> GetByMeniuIdAsync(int meniuId)
+        {
+            return await _context.Restaurants.Include(r => r.Meniu).Where(p => p.MeniuId == meniuId).ToListAsync();
+        }
+
+        public async Task<int> CreateAsync(Restaurant restaurant)
         {
             _context.Add(restaurant);
             await _context.SaveChangesAsync();
+            return restaurant.Id;
         }
 
         public async Task DeleteAsync(Restaurant restaurant)

@@ -32,9 +32,9 @@ namespace RestaurantProject.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(Meniu meniu)
         {
-            await _meniuService.CreateAsync(meniu);
+            var result = await _meniuService.CreateAsync(meniu);
 
-            return NoContent();
+            return Ok(result);
         }
 
         [HttpDelete("{id}")]
